@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+    <h1>Список задач</h1>
+    {% for task in todolist %}
+    <h3>Описание: </h3><p>{{ task.description }}</p>
+    <h3>Статус: </h3><p>{{ task.status }}</p>
+    <h3>Дата выполнения: </h3><p>{{ task.action_date }}</p>
+    {% endfor %}
+</body>
+</html>

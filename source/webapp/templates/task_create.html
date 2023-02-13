@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Create</title>
+</head>
+<body>
+<h1>Create Task</h1>
+<form action="/todolist/add" method="post">
+    {% csrf_token %}
+    <label>Описание:</label><br/>
+    <input type="text" name="description"/><br/>
+    <label>Статус:</label><br/>
+    <select name="status">
+        <option value="new">Новая</option>
+        <option value="in progress">В процессе</option>
+        <option value="done">Сделано</option>
+    </select><br>
+    <label>Дата выполнения:</label><br/>
+    <input type="date" name="action_date"/><br/>
+    <br/>
+    <input type="submit" value="Send"/>
+</form>
+</body>
+</html>
