@@ -2,20 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tasks</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
-    <h1>Список задач</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="static/media/ToDoList-icon.jpg" alt="" width="30" height="24"
+                 class="d-inline-block align-text-top">
+            To-Do list
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/tasks_view">Задачи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/todolist/add">Добавить новую задачу</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<div class="container">
+    {% if todolist %}
     {% for task in todolist %}
-    <h2>Задача #{{ task.id }}</h2>
-    <h3>Описание: </h3>
-    <p>{{ task.description }}</p>
-    <h3>Статус: </h3>
-    <p>{{ task.status }}</p>
-    <h3>Дата выполнения: </h3>
-    <p>{{ task.action_date }}</p>
-    <p><a href="/todolist/edit/?pk={{ task.pk }}">Редактировать задачу</a></p>
-    <p><a href="/todolist/?pk={{ task.pk }}">Удалить задачу</a></p>
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+            <h5 class="card-title">Задача #{{ task.id }}</h5>
+            <p class="card-text">Описание: {{ task.description }}</p>
+            <p class="card-text">Статус: {{ task.status }}</p>
+            <p class="card-text">Дата выполнения: {{ task.action_date }}</p>
+            <a href="/todolist/edit/?pk={{ task.pk }}" class="card-link">Редактировать задачу</a>
+            <a href="/todolist/?pk={{ task.pk }}" class="card-link">Удалить задачу</a>
+        </div>
+    </div>
+    <br>
     {% endfor %}
+    {% else %}
+    <h2>Задач нет!</h2>
+    <p><a href="/todolist/add">Добавить новую задачу</a></p>
+    {% endif %}
+</div>
 </body>
 </html>

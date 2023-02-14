@@ -1,0 +1,29 @@
+[
+{
+  "model": "webapp.todolist",
+  "pk": 1,
+  "fields": {
+    "description": "Купить продуктов",
+    "status": "new",
+    "action_date": "2023-02-14"
+  }
+},
+{
+  "model": "webapp.todolist",
+  "pk": 2,
+  "fields": {
+    "description": "Сделать дз #52",
+    "status": "done",
+    "action_date": "2023-02-14"
+  }
+},
+{
+  "model": "webapp.todolist",
+  "pk": 3,
+  "fields": {
+    "description": "Посетить занятие #53",
+    "status": "in progress",
+    "action_date": "2023-02-14"
+  }
+}
+]

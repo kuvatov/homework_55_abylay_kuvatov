@@ -13,11 +13,11 @@ def tasks_view(request):
     return render(request, 'tasks_view.html', context=context)
 
 
-def task_add(request: WSGIRequest):
+def task_create(request: WSGIRequest):
     if request.method == 'GET':
         return render(request, 'task_create.html')
     todolist = {
-        'description': request.POST.get('description'),
+        'description': request.POST.get('description').capitalize(),
         'status': request.POST.get('status'),
         'action_date': request.POST.get('action_date')
     }

@@ -1,29 +1,57 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Edit Task</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
-<h1>Редактировать задачу</h1>
-<h3>Задача #{{ todolist.id }}</h3>
-<form action="/todolist/edit/?pk={{ todolist.pk }}" method="post">
-    {% csrf_token %}
-    <label>Описание:</label><br/>
-    <input type="text" name="description" value="{{ todolist.description }}"/><br/>
-    <label>Статус:</label><br/>
-    <select name="status">
-        <option value="new">Новая</option>
-        <option value="in progress">В процессе</option>
-        <option value="done">Сделано</option>
-    </select><br>
-    <label>Дата выполнения:</label><br/>
-    <input type="date" name="action_date" value="{{ todolist.action_date }}"/><br/>
-    <br/>
-    <input type="submit" value="Send"/>
-</form>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="../../static/media/ToDoList-icon.jpg" alt="" width="30" height="24"
+                 class="d-inline-block align-text-top">
+            To-Do list
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/tasks_view">Задачи</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <br>
+    <h3>Редактировать задачу #{{ todolist.id }}</h3>
+    <br>
+    <form action="/todolist/edit/?pk={{ todolist.pk }}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Описание:</label>
+            <input type="text" name="description" class="form-control" id="exampleFormControlInput1"
+                   value="{{ todolist.description }}" required>
+        </div>
+        <label>Статус:</label><br/>
+        <select class="form-select" name="status" aria-label="Default select example" required>
+            <option value="new" selected>Новая</option>
+            <option value="in progress">В процессе</option>
+            <option value="done">Сделано</option>
+        </select>
+        <br>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Дата выполнения:</label>
+            <input type="date" name="action_date" class="form-control" id="exampleFormControlInput1" value="2023-01-01">
+        </div>
+        <input type="submit" value="Изменить"/>
+    </form>
+    <br>
     <p><a href="/tasks_view">Отмена</a></p>
+</div>
 </body>
 </html>
