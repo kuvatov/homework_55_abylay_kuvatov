@@ -14,6 +14,7 @@
     <p>{{ task.status }}</p>
     <h3>Дата выполнения: </h3>
     <p>{{ task.action_date }}</p>
+    <p><a href="/todolist/edit/?pk={{ task.pk }}">Редактировать задачу</a></p>
     <p><a href="/todolist/?pk={{ task.pk }}">Удалить задачу</a></p>
     {% endfor %}
 </body>

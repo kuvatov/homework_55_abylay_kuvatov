@@ -4,24 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Create task</title>
+    <title>Edit Task</title>
 </head>
 <body>
-<h1>Создать задачу</h1>
-<form action="/todolist/add" method="post">
+<h1>Редактировать задачу</h1>
+<h3>Задача #{{ todolist.id }}</h3>
+<form action="/todolist/edit/?pk={{ todolist.pk }}" method="post">
     {% csrf_token %}
     <label>Описание:</label><br/>
-    <input type="text" name="description" required/><br/>
+    <input type="text" name="description" value="{{ todolist.description }}"/><br/>
     <label>Статус:</label><br/>
-    <select name="status" required>
+    <select name="status">
         <option value="new">Новая</option>
         <option value="in progress">В процессе</option>
         <option value="done">Сделано</option>
     </select><br>
     <label>Дата выполнения:</label><br/>
-    <input type="date" name="action_date"/><br/>
+    <input type="date" name="action_date" value="{{ todolist.action_date }}"/><br/>
     <br/>
     <input type="submit" value="Send"/>
 </form>
+    <p><a href="/tasks_view">Отмена</a></p>
 </body>
 </html>
