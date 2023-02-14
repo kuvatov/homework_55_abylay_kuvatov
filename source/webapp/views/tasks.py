@@ -23,3 +23,10 @@ def task_add(request: WSGIRequest):
     }
     ToDoList.objects.create(**todolist)
     return redirect('/tasks_view')
+
+
+def task_remove(request: WSGIRequest):
+    task_pk = request.GET.get('pk')
+    todolist = ToDoList.objects.get(pk=task_pk)
+    todolist.delete()
+    return redirect('/tasks_view')
