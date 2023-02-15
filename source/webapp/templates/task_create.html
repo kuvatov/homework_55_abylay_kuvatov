@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{% url 'home' %}">
             <img src="../../static/media/ToDoList-icon.jpg" alt="" width="30" height="24"
                  class="d-inline-block align-text-top">
             To-Do list
@@ -38,9 +38,9 @@
         </div>
         <label>Статус:</label><br/>
         <select class="form-select" name="status" aria-label="Default select example" required>
-            <option value="new" selected>Новая</option>
-            <option value="in progress">В процессе</option>
-            <option value="done">Сделано</option>
+            {% for choice in choices %}
+            <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+            {% endfor %}
         </select>
         <br>
         <div class="mb-3">
