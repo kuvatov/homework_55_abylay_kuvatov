@@ -1,6 +1,6 @@
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from webapp.models import ToDoList
@@ -32,7 +32,7 @@ def task_create(request: WSGIRequest):
 def task_remove(request: WSGIRequest, pk: int):
     todolist = ToDoList.objects.get(pk=pk)
     todolist.delete()
-    return redirect('/tasks_view')
+    return HttpResponseRedirect(reverse('tasks_view'))
 
 
 def task_edit(request: WSGIRequest, pk: int):
@@ -47,4 +47,4 @@ def task_edit(request: WSGIRequest, pk: int):
         'action_date': request.POST.get('action_date')
     }
     ToDoList.objects.filter(pk=pk).update(**todolist)
-    return redirect('/tasks_view')
+    return HttpResponseRedirect(reverse('tasks_view'))
