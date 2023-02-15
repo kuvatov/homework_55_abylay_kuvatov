@@ -2,7 +2,7 @@
 {% block title %}Tasks View{% endblock %}
 {% block menu %}
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/todolist/add">Добавить новую задачу</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'task_create' %}">Добавить новую задачу</a>
     </li>
 {% endblock %}
 {% block content %}
