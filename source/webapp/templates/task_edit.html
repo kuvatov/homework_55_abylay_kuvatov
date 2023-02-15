@@ -30,7 +30,7 @@
     <br>
     <h3>Редактировать задачу #{{ todolist.id }}</h3>
     <br>
-    <form action="/todolist/edit/?pk={{ todolist.pk }}" method="post">
+    <form action="/todolist/edit/{{ todolist.pk }}" method="post">
         {% csrf_token %}
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Описание:</label>

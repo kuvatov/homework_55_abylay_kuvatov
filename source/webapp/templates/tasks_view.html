@@ -39,8 +39,8 @@
             <p class="card-text">Описание: {{ task.description }}</p>
             <p class="card-text">Статус: {{ task.status }}</p>
             <p class="card-text">Дата выполнения: {{ task.action_date }}</p>
-            <a href="/todolist/edit/?pk={{ task.pk }}" class="card-link">Редактировать задачу</a>
-            <a href="/todolist/?pk={{ task.pk }}" class="card-link">Удалить задачу</a>
+            <a href="/todolist/edit/{{ task.pk }}" class="card-link">Редактировать задачу</a>
+            <a href="/todolist/{{ task.pk }}" class="card-link">Удалить задачу</a>
         </div>
     </div>
     <br>

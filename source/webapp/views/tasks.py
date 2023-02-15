@@ -1,5 +1,6 @@
 from django.core.handlers.wsgi import WSGIRequest
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404
 
 from webapp.models import ToDoList
 
@@ -25,24 +26,22 @@ def task_create(request: WSGIRequest):
     return redirect('/tasks_view')
 
 
-def task_remove(request: WSGIRequest):
-    task_pk = request.GET.get('pk')
-    todolist = ToDoList.objects.get(pk=task_pk)
+def task_remove(request: WSGIRequest, pk: int):
+    todolist = ToDoList.objects.get(pk=pk)
     todolist.delete()
     return redirect('/tasks_view')
 
 
-def task_edit(request: WSGIRequest):
-    task_pk = request.GET.get('pk')
+def task_edit(request: WSGIRequest, pk: int):
     if request.method == "GET":
-        context = {
-            'todolist': ToDoList.objects.get(pk=task_pk)
-        }
-        return render(request, 'task_edit.html', context=context)
+        todolist = get_object_or_404(ToDoList, pk=pk)
+        return render(request, 'task_edit.html', context={
+            'todolist': todolist
+        })
     todolist = {
         'description': request.POST.get('description'),
         'status': request.POST.get('status'),
         'action_date': request.POST.get('action_date')
     }
-    ToDoList.objects.filter(pk=task_pk).update(**todolist)
+    ToDoList.objects.filter(pk=pk).update(**todolist)
     return redirect('/tasks_view')
