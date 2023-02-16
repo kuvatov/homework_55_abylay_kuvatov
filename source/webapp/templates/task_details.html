@@ -12,7 +12,12 @@
         </div>
         <div class="card-body">
             <p class="card-text">Описание: {{ todolist.description }}</p>
-            <p class="card-text">Подробное описание: {{ todolist.detailed_description }}</p>
+            {% if todolist.detailed_description %}
+<!--                <textarea class="card-text" readonly>Подробное описание: {{ todolist.detailed_description }}</textarea>-->
+                <p class="card-text">Подробное описание: <textarea readonly>{{ todolist.detailed_description }}</textarea></p>
+            {% else %}
+                <p class="card-text">Подробное описание: не добавлено</p>
+            {% endif %}
             {% for choice in choices %}
                 {% if choice.0 == todolist.status %}
                     <p class="card-text">Статус: {{ choice.1 }}</p>

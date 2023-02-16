@@ -23,6 +23,7 @@ def task_create(request: WSGIRequest):
         })
     todolist = {
         'description': request.POST.get('description').capitalize(),
+        'detailed_description': request.POST.get('detailed_description'),
         'status': request.POST.get('status'),
         'action_date': request.POST.get('action_date')
     }
@@ -40,10 +41,12 @@ def task_edit(request: WSGIRequest, pk: int):
     if request.method == "GET":
         todolist = get_object_or_404(ToDoList, pk=pk)
         return render(request, 'task_edit.html', context={
-            'todolist': todolist
+            'todolist': todolist,
+            'choices': StatusChoice.choices
         })
     todolist = {
         'description': request.POST.get('description'),
+        'detailed_description': request.POST.get('detailed_description'),
         'status': request.POST.get('status'),
         'action_date': request.POST.get('action_date')
     }

@@ -6,18 +6,22 @@
     <br>
     <h3>Редактировать задачу #{{ todolist.id }}</h3>
     <br>
-    <form action="/todolist/edit/{{ todolist.pk }}" method="post">
+    <form action="{% url 'task_edit' todolist.pk %}" method="post">
         {% csrf_token %}
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Описание:</label>
             <input type="text" name="description" class="form-control" id="exampleFormControlInput1"
                    value="{{ todolist.description }}" required>
         </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Подробное описание:</label>
+            <textarea name="detailed_description" class="form-control">{{ todolist.detailed_description }}</textarea>
+        </div>
         <label>Статус:</label><br/>
         <select class="form-select" name="status" aria-label="Default select example" required>
-            <option value="new" selected>Новая</option>
-            <option value="in progress">В процессе</option>
-            <option value="done">Сделано</option>
+            {% for choice in choices %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
         </select>
         <br>
         <div class="mb-3">

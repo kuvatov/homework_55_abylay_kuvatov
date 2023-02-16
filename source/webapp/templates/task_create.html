@@ -12,10 +12,14 @@
             <label for="exampleFormControlInput1" class="form-label">Описание:</label>
             <input type="text" name="description" class="form-control" id="exampleFormControlInput1" required>
         </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Подробное описание:</label>
+            <textarea name="detailed_description" class="form-control"></textarea>
+        </div>
         <label>Статус:</label><br/>
         <select class="form-select" name="status" aria-label="Default select example" required>
             {% for choice in choices %}
-            <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
             {% endfor %}
         </select>
         <br>
