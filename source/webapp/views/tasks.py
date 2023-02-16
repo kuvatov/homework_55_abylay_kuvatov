@@ -3,14 +3,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
-from webapp.models import ToDoList
+from webapp.models import ToDoList, StatusChoice
 
 
 # Create your views here.
 def tasks_view(request):
     todolist = ToDoList.objects.all()
     context = {
-        'todolist': todolist
+        'todolist': todolist,
+        'choices': StatusChoice.choices
     }
     return render(request, 'tasks_view.html', context=context)
 
@@ -18,7 +19,7 @@ def tasks_view(request):
 def task_create(request: WSGIRequest):
     if request.method == 'GET':
         return render(request, 'task_create.html', context={
-            'choices': ToDoList.STATUS_CHOICES
+            'choices': StatusChoice.choices
         })
     todolist = {
         'description': request.POST.get('description').capitalize(),

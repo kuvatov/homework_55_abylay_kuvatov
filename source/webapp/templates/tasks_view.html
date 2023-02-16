@@ -12,7 +12,11 @@
                 <div class="card-body">
                     <h5 class="card-title">Задача #{{ task.id }}</h5>
                     <p class="card-text">Описание: {{ task.description }}</p>
-                    <p class="card-text">Статус: {{ task.status }}</p>
+                    {% for choice in choices %}
+                        {% if choice.0 == task.status %}
+                            <p class="card-text">Статус: {{ choice.1 }}</p>
+                        {% endif %}
+                    {% endfor %}
                     <p class="card-text">Дата выполнения: {{ task.action_date }}</p>
                     <a href="{% url 'task_edit' task.pk %}" class="card-link">Редактировать задачу</a>
                     <a href="{% url 'task_remove' task.pk %}" class="card-link">Удалить задачу</a>
