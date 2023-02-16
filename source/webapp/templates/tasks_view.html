@@ -1,31 +1,32 @@
 {% extends 'base.html' %}
 {% block title %}Tasks View{% endblock %}
 {% block menu %}
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{% url 'task_create' %}">Добавить новую задачу</a>
-    </li>
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'task_create' %}">Добавить новую задачу</a>
+</li>
 {% endblock %}
 {% block content %}
-    {% if todolist %}
-        {% for task in todolist %}
-            <div class="card" style="width: 25rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Задача #{{ task.id }}</h5>
-                    <p class="card-text">Описание: {{ task.description }}</p>
-                    {% for choice in choices %}
-                        {% if choice.0 == task.status %}
-                            <p class="card-text">Статус: {{ choice.1 }}</p>
-                        {% endif %}
-                    {% endfor %}
-                    <p class="card-text">Дата выполнения: {{ task.action_date }}</p>
-                    <a href="{% url 'task_edit' task.pk %}" class="card-link">Редактировать задачу</a>
-                    <a href="{% url 'task_remove' task.pk %}" class="card-link">Удалить задачу</a>
-                </div>
-            </div>
-            <br>
+{% if todolist %}
+{% for task in todolist %}
+<div class="card" style="width: 25rem;">
+    <div class="card-body">
+        <h5 class="card-title">Задача #{{ task.id }}</h5>
+        <a href="{% url 'task_details' task.pk %}">Побробнее</a>
+        <p class="card-text">Описание: {{ task.description }}</p>
+        {% for choice in choices %}
+        {% if choice.0 == task.status %}
+        <p class="card-text">Статус: {{ choice.1 }}</p>
+        {% endif %}
         {% endfor %}
-    {% else %}
-        <h2>Задач нет!</h2>
-        <p><a href="{% url 'task_create' %}">Добавить новую задачу</a></p>
-    {% endif %}
+        <p class="card-text">Дата выполнения: {{ task.action_date }}</p>
+        <a href="{% url 'task_edit' task.pk %}" class="card-link">Редактировать задачу</a>
+        <a href="{% url 'task_remove' task.pk %}" class="card-link">Удалить задачу</a>
+    </div>
+</div>
+<br>
+{% endfor %}
+{% else %}
+<h2>Задач нет!</h2>
+<p><a href="{% url 'task_create' %}">Добавить новую задачу</a></p>
+{% endif %}
 {% endblock %}

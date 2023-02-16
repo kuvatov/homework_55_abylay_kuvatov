@@ -49,3 +49,11 @@ def task_edit(request: WSGIRequest, pk: int):
     }
     ToDoList.objects.filter(pk=pk).update(**todolist)
     return HttpResponseRedirect(reverse('tasks_view'))
+
+
+def task_details(request: WSGIRequest, pk: int):
+    todolist = get_object_or_404(ToDoList, pk=pk)
+    return render(request, 'task_details.html', context={
+        'todolist': todolist,
+        'choices': StatusChoice.choices
+    })

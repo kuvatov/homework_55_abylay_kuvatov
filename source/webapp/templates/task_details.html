@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Task Details{% endblock %}
+{% block menu %}{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <br>
+    <h3>Подробное описание</h3>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            Задача #{{ todolist.id }}
+        </div>
+        <div class="card-body">
+            <p class="card-text">Описание: {{ todolist.description }}</p>
+            <p class="card-text">Подробное описание: {{ todolist.detailed_description }}</p>
+            {% for choice in choices %}
+                {% if choice.0 == todolist.status %}
+                    <p class="card-text">Статус: {{ choice.1 }}</p>
+                {% endif %}
+            {% endfor %}
+            <p class="card-text">Дата выполнения: {{ todolist.action_date }}</p>
+            <a href="{% url 'task_edit' todolist.pk %}" class="card-link">Редактировать задачу</a>
+            <a href="{% url 'tasks_view' %}" class="card-link">Назад</a>
+        </div>
+    </div>
+    <br>
+</div>
+{% endblock %}
