@@ -4,19 +4,21 @@
 {% block content %}
 <div class="container-fluid">
     <br>
-    <h3>Создать задачу</h3>
+    <div class="edit_heading">
+        <h5>Создать задачу</h5>
+    </div>
     <br>
     <form action="/todolist/add" method="post">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Описание:</label>
+            <label for="exampleFormControlInput1" class="form-label"><b>Описание:</b></label>
             <input type="text" name="description" class="form-control" id="exampleFormControlInput1" required>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Подробное описание:</label>
-            <textarea name="detailed_description" class="form-control"></textarea>
+            <label for="exampleFormControlInput1" class="form-label"><b>Подробное описание:</b></label>
+            <textarea name="detailed_description" class="form-control" id="autoresizing"></textarea>
         </div>
-        <label>Статус:</label><br/>
+        <label><b>Статус:</b></label><br/>
         <select class="form-select" name="status" aria-label="Default select example" required>
             {% for choice in choices %}
             <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -24,10 +26,13 @@
         </select>
         <br>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Дата выполнения:</label>
+            <label for="exampleFormControlInput1" class="form-label"><b>Дата выполнения:</b></label>
             <input type="date" name="action_date" class="form-control" id="exampleFormControlInput1" value="2023-01-01">
         </div>
-        <input type="submit" value="Создать"/>
+        <div class="page_action">
+            <input type="submit" class="btn btn-success" value="Создать"/>
+            <a class="btn btn-danger" href="{% url 'home' %}">Отмена</a>
+        </div>
     </form>
 </div>
 {% endblock %}

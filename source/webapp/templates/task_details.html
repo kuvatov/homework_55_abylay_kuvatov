@@ -4,28 +4,32 @@
 {% block content %}
 <div class="container-fluid">
     <br>
-    <h3>Подробное описание</h3>
+    <div class="page_action">
+        <a href="{% url 'task_edit' todolist.pk %}" class="btn btn-secondary">Редактировать задачу</a>
+        <h5 class="page_name">Подробное описание</h5>
+    </div>
     <br>
     <div class="card">
-        <div class="card-header">
-            Задача #{{ todolist.id }}
+        <div class="card-header view_detail">
+            <h5>Задача #{{ todolist.id }}</h5>
         </div>
         <div class="card-body">
-            <p class="card-text">Описание: {{ todolist.description }}</p>
+            <p class="card-text"><b>Описание:</b> {{ todolist.description }}</p>
             {% if todolist.detailed_description %}
-<!--                <textarea class="card-text" readonly>Подробное описание: {{ todolist.detailed_description }}</textarea>-->
-                <p class="card-text">Подробное описание: <textarea readonly>{{ todolist.detailed_description }}</textarea></p>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"><b>Подробное описание:</b></label>
+                <pre>{{ todolist.detailed_description }}</pre>
+            </div>
             {% else %}
-                <p class="card-text">Подробное описание: не добавлено</p>
+            <p class="card-text"><b>Подробное описание:</b> не добавлено</p>
             {% endif %}
             {% for choice in choices %}
-                {% if choice.0 == todolist.status %}
-                    <p class="card-text">Статус: {{ choice.1 }}</p>
-                {% endif %}
+            {% if choice.0 == todolist.status %}
+            <p class="card-text"><b>Статус:</b> {{ choice.1 }}</p>
+            {% endif %}
             {% endfor %}
-            <p class="card-text">Дата выполнения: {{ todolist.action_date }}</p>
-            <a href="{% url 'task_edit' todolist.pk %}" class="card-link">Редактировать задачу</a>
-            <a href="{% url 'tasks_view' %}" class="card-link">Назад</a>
+            <p class="card-text"><b>Дата выполнения:</b> {{ todolist.action_date }}</p>
+            <a href="{% url 'tasks_view' %}" class="btn btn-primary">Назад</a>
         </div>
     </div>
     <br>

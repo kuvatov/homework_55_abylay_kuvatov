@@ -9,16 +9,16 @@
 {% if todolist %}
 {% for task in todolist %}
 <div class="card" style="width: 25rem;">
-    <div class="card-body">
+    <div class="card-body view_body">
         <h5 class="card-title">Задача #{{ task.id }}</h5>
         <a href="{% url 'task_details' task.pk %}">Побробнее</a>
-        <p class="card-text">Описание: {{ task.description }}</p>
+        <p class="card-text"><b>Описание:</b> {{ task.description }}</p>
         {% for choice in choices %}
         {% if choice.0 == task.status %}
-        <p class="card-text">Статус: {{ choice.1 }}</p>
+        <p class="card-text"><b>Статус:</b> {{ choice.1 }}</p>
         {% endif %}
         {% endfor %}
-        <p class="card-text">Дата выполнения: {{ task.action_date }}</p>
+        <p class="card-text"><b>Дата выполнения:</b> {{ task.action_date }}</p>
         <a href="{% url 'task_edit' task.pk %}" class="card-link">Редактировать задачу</a>
         <a href="{% url 'task_remove' task.pk %}" class="card-link">Удалить задачу</a>
     </div>

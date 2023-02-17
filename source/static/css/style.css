@@ -1,6 +1,56 @@
 .container {
     padding-top: 20px;
+    position: relative;
+    min-height: 100vh;
 }
 .container a {
     text-decoration: none;
+}
+.view_body h5{
+    display: inline-block;
+    padding: 0 20px 10px 0;
+    color: darkgoldenrod;
+}
+.view_detail h5{
+    color: darkgoldenrod;
+}
+.edit_heading {
+    text-align: right;
+}
+#autoresizing {
+    display: block;
+    overflow: hidden;
+    resize: none;
+}
+pre {
+    white-space: pre-wrap;
+}
+.page_name {
+    text-align: right;
+    display: inline-block;
+}
+.page_name span {
+    color: darkgoldenrod
+}
+.btn {
+    display: inline-block;
+}
+.page_action {
+    display: flex;
+    justify-content: space-between;
+}
+footer {
+    background-color: #0d6efd;
+    color: white;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+footer p {
+    margin: 0;
+    font-size: 10px;
 }
