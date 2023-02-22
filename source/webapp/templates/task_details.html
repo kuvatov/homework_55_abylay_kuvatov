@@ -5,30 +5,30 @@
 <div class="container-fluid">
     <br>
     <div class="page_action">
-        <a href="{% url 'task_edit' todolist.pk %}" class="btn btn-secondary">Редактировать задачу</a>
+        <a href="{% url 'task_edit' task.pk %}" class="btn btn-secondary">Редактировать задачу</a>
         <h5 class="page_name">Подробное описание</h5>
     </div>
     <br>
     <div class="card">
         <div class="card-header view_detail">
-            <h5>Задача #{{ todolist.id }}</h5>
+            <h5>Задача #{{ task.id }}</h5>
         </div>
         <div class="card-body">
-            <p class="card-text"><b>Описание:</b> {{ todolist.description }}</p>
-            {% if todolist.detailed_description %}
+            <p class="card-text"><b>Описание:</b> {{ task.description }}</p>
+            {% if task.detailed_description %}
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label"><b>Подробное описание:</b></label>
-                <pre>{{ todolist.detailed_description }}</pre>
+                <pre>{{ task.detailed_description }}</pre>
             </div>
             {% else %}
             <p class="card-text"><b>Подробное описание:</b> не добавлено</p>
             {% endif %}
             {% for choice in choices %}
-            {% if choice.0 == todolist.status %}
+            {% if choice.0 == task.status %}
             <p class="card-text"><b>Статус:</b> {{ choice.1 }}</p>
             {% endif %}
             {% endfor %}
-            <p class="card-text"><b>Дата выполнения:</b> {{ todolist.action_date }}</p>
+            <p class="card-text"><b>Дата выполнения:</b> {{ task.action_date }}</p>
             <a href="{% url 'tasks_view' %}" class="btn btn-primary">Назад</a>
         </div>
     </div>

@@ -6,8 +6,8 @@
 </li>
 {% endblock %}
 {% block content %}
-{% if todolist %}
-{% for task in todolist %}
+{% if tasks %}
+{% for task in tasks %}
 <div class="card" style="width: 25rem;">
     <div class="card-body view_body">
         <h5 class="card-title">Задача #{{ task.id }}</h5>
@@ -20,7 +20,7 @@
         {% endfor %}
         <p class="card-text"><b>Дата выполнения:</b> {{ task.action_date }}</p>
         <a href="{% url 'task_edit' task.pk %}" class="card-link">Редактировать задачу</a>
-        <a href="{% url 'task_remove' task.pk %}" class="card-link">Удалить задачу</a>
+        <a href="{% url 'task_delete' task.pk %}" class="card-link">Удалить задачу</a>
     </div>
 </div>
 <br>

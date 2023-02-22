@@ -5,10 +5,10 @@
 <div class="container-fluid">
     <br>
     <div class="edit_heading">
-        <h5 class="page_name">Редактировать задачу <span>#{{ todolist.id }}</span></h5>
+        <h5 class="page_name">Редактировать задачу <span>#{{ task.id }}</span></h5>
     </div>
     <br>
-    <form action="{% url 'task_edit' todolist.pk %}" method="post">
+    <form action="{% url 'task_edit' task.pk %}" method="post">
         {% include 'partial/task_form.html' with button_text='Редактировать' %}
     </form>
 </div>

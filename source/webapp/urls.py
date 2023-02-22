@@ -1,13 +1,13 @@
 from django.urls import path
 
-import webapp.views.base
-import webapp.views.tasks
+from webapp.views.base import home_view
+from webapp.views.tasks import tasks_view, task_create, task_edit, task_details, task_delete
 
 urlpatterns = [
-    path("", webapp.views.base.home_view, name='home'),
-    path('tasks_view', webapp.views.tasks.tasks_view, name='tasks_view'),
-    path('todolist/add', webapp.views.tasks.task_create, name='task_create'),
-    path('todolist/<int:pk>', webapp.views.tasks.task_remove, name='task_remove'),
-    path('todolist/edit/<int:pk>', webapp.views.tasks.task_edit, name='task_edit'),
-    path('todolist/task_details/<int:pk>', webapp.views.tasks.task_details, name='task_details')
+    path("", home_view, name='home'),
+    path('tasks', tasks_view, name='tasks_view'),
+    path('task/add', task_create, name='task_create'),
+    path('task/<int:pk>/delete', task_delete, name='task_delete'),
+    path('task/<int:pk>/edit', task_edit, name='task_edit'),
+    path('task/<int:pk>/details', task_details, name='task_details')
 ]
