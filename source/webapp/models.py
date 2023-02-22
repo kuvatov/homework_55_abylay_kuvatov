@@ -22,3 +22,6 @@ class ToDoList(models.Model):
 
     def __str__(self):
         return f"{self.description} - {self.detailed_description} - {self.status} - {self.action_date}"
+
+    class Meta:
+        verbose_name_plural = "To-Do List"

@@ -1,0 +1,30 @@
+{% csrf_token %}
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"><b>Описание:</b></label>
+    <input type="text" name="description" class="form-control" id="exampleFormControlInput1"
+           value="{{ todolist.description }}" required>
+</div>
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"><b>Подробное описание:</b></label>
+    <textarea name="detailed_description" class="form-control"
+              id="autoresizing">{{ todolist.detailed_description }}</textarea>
+</div>
+<label><b>Статус:</b></label><br/>
+<select class="form-select" name="status" aria-label="Default select example" required>
+    {% for choice in choices %}
+    {% if choice.0 == todolist.status %}
+    <option value="todolist.status" selected>{{ choice.1 }}</option>
+    {% else %}
+    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+    {% endif %}
+    {% endfor %}
+</select>
+<br>
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"><b>Дата выполнения:</b></label>
+    <input type="date" name="action_date" class="form-control" id="exampleFormControlInput1" value="2023-01-01">
+</div>
+<div class="page_action">
+    <input type="submit" class="btn btn-success" value="{{ button_text }}"/>
+    <a class="btn btn-danger" href="{% url 'tasks_view' %}">Отмена</a>
+</div>
