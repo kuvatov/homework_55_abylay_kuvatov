@@ -19,7 +19,6 @@ def task_create(request: WSGIRequest):
     if request.method == 'GET':
         form = ToDoListForm()
         return render(request, 'task_create.html', context={
-            'choices': StatusChoice.choices,
             'form': form
         })
     form = ToDoListForm(data=request.POST)
@@ -28,7 +27,6 @@ def task_create(request: WSGIRequest):
         return redirect('tasks_view')
     else:
         return render(request, 'task_create.html', context={
-            'choices': StatusChoice.choices,
             'form': form
         })
 
@@ -39,37 +37,22 @@ def task_delete(request: WSGIRequest, pk: int):
     return redirect('tasks_view')
 
 
-# def task_edit(request: WSGIRequest, pk: int):
-#     if request.method == "GET":
-#         todolist = get_object_or_404(ToDoList, pk=pk)
-#         return render(request, 'task_edit.html', context={
-#             'todolist': todolist,
-#             'choices': StatusChoice.choices
-#         })
-#     todolist = {
-#         'description': request.POST.get('description'),
-#         'detailed_description': request.POST.get('detailed_description'),
-#         'status': request.POST.get('status'),
-#         'action_date': request.POST.get('action_date')
-#     }
-#     ToDoList.objects.filter(pk=pk).update(**todolist)
-#     return redirect('tasks_view')
-
 def task_edit(request: WSGIRequest, pk: int):
+    task = get_object_or_404(ToDoList, pk=pk)
     if request.method == 'GET':
-        form = ToDoListForm()
+        form = ToDoListForm(instance=task)
         return render(request, 'task_edit.html', context={
-            'choices': StatusChoice.choices,
-            'form': form
+            'form': form,
+            'task': task
         })
-    form = ToDoListForm(data=request.POST)
+    form = ToDoListForm(request.POST, instance=task)
     if form.is_valid():
-        ToDoList.objects.filter(pk=pk).update(**form.cleaned_data)
-        return redirect('tasks_view')
+        form.save()
+        return redirect('task_details', pk=task.pk)
     else:
         return render(request, 'task_edit.html', context={
-            'choices': StatusChoice.choices,
-            'form': form
+            'form': form,
+            'task': task
         })
 
 
