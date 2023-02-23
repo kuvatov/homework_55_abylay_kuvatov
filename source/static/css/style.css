@@ -34,7 +34,7 @@ body {
 .content_heading {
     text-align: right;
 }
-#autoresizing {
+textarea {
     display: block;
     overflow: hidden;
     resize: none;

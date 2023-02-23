@@ -2,8 +2,7 @@
 {% block title %}Tasks View{% endblock %}
 {% block content_heading %}Задачи{% endblock %}
 {% block content %}
-<input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
-<label class="btn btn-danger" for="btn-check-2">Удалить отмеченные</label>
+<input type="submit" class="btn btn-danger" value="Удалить выбранные" style="display:none" id="checkbox-button"/>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     {% if tasks %}
     {% for task in tasks %}
@@ -13,7 +12,8 @@
                 <div class="card-body-header pb-3">
                     <h5 class="card-title">Задача #{{ task.id }}</h5>
                     <a class="card-details ps-3" href="{% url 'task_details' task.pk %}">Побробнее...</a>
-                    <input type="checkbox" id="checkbox{{ task.pk }}" class="form-check-input card-checkbox" value="">
+                    <input type="checkbox" id="btn-checkbox" class="form-check-input card-checkbox"
+                           onclick="checkbox_delete()">
                 </div>
                 <p class="card-text"><b>Описание:</b> {{ task.description }}</p>
                 {% for choice in choices %}
@@ -64,3 +64,4 @@
     <p><a href="{% url 'task_create' %}">Добавить новую задачу</a></p>
     {% endif %}
     {% endblock %}
+</div>
