@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Task Details{% endblock %}
-{% block menu %}{% endblock %}
+{% block content_heading %}Подробное описание{% endblock %}
 {% block content %}
 <div class="container-fluid">
     <br>
     <div class="page_action">
         <a href="{% url 'task_edit' task.pk %}" class="btn btn-secondary">Редактировать задачу</a>
-        <h5 class="page_name">Подробное описание</h5>
     </div>
     <br>
-    <div class="card">
+    <div class="card pb-3">
         <div class="card-header view_detail">
             <h5>Задача #{{ task.id }}</h5>
         </div>
@@ -29,9 +28,10 @@
             {% endif %}
             {% endfor %}
             <p class="card-text"><b>Дата выполнения:</b> {{ task.action_date }}</p>
-            <a href="{% url 'tasks_view' %}" class="btn btn-primary">Назад</a>
         </div>
     </div>
-    <br>
+    <div class="task-details-return-button pt-3">
+        <a href="{% url 'tasks_view' %}" class="btn btn-primary">Назад</a>
+    </div>
 </div>
 {% endblock %}

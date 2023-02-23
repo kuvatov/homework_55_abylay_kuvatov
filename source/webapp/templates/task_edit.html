@@ -1,15 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Task Edit{% endblock %}
-{% block menu %}{% endblock %}
+{% block content_heading %}Редактировать задачу{% endblock %}
 {% block content %}
-<div class="container-fluid">
-    <br>
-    <div class="edit_heading">
-        <h5 class="page_name">Редактировать задачу <span>#{{ task.id }}</span></h5>
-    </div>
-    <br>
-    <form action="{% url 'task_edit' task.pk %}" method="post">
-        {% include 'partial/task_form.html' with button_text='Редактировать' %}
-    </form>
-</div>
+<form action="{% url 'task_edit' task.pk %}" method="post">
+    {% include 'partial/task_form.html' with button_text='Редактировать' %}
+</form>
 {% endblock %}

@@ -1,5 +1,6 @@
+{% load bootstrap5 %}
 {% csrf_token %}
-{{ form.as_p }}
+{% bootstrap_form form %}
 <div class="page_action">
     <input type="submit" class="btn btn-success" value="{{ button_text }}"/>
     <a class="btn btn-danger" href="{% url 'tasks_view' %}">Отмена</a>

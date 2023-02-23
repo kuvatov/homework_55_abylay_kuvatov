@@ -13,10 +13,8 @@ class StatusChoice(TextChoices):
 
 # Create your models here.
 class ToDoList(models.Model):
-    description = models.CharField(max_length=200, null=False, blank=False, help_text="Describe the task",
-                                   verbose_name="Description")
-    detailed_description = models.TextField(max_length=2000, null=True, help_text="Enter a detailed description",
-                                            verbose_name="Detailed description")
+    description = models.CharField(max_length=200, null=False, blank=False, verbose_name="Description")
+    detailed_description = models.TextField(max_length=2000, null=True, blank=True, verbose_name="Detailed description")
     status = models.CharField(max_length=20, null=False, blank=False, choices=StatusChoice.choices,
                               default=StatusChoice.NEW_STATUS, verbose_name="Status")
     is_deleted = models.BooleanField(verbose_name="Deleted", null=False, default=False)
