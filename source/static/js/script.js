@@ -10,16 +10,25 @@ textarea = document.querySelector('textarea');
     }
 
 
-function checkbox_delete() {
-  // Get the checkbox
-  var checkBox = document.getElementById("btn-checkbox");
-  // Get the output text
-  var text = document.getElementById("checkbox-button");
+function checkbox_show_delete_button(id) {
+  var checkBox = document.getElementById(id);
+  var btn = document.getElementById('checkbox_delete_button');
 
-  // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
-    text.style.display = "block";
+    btn.style.display = "inline-block";
   } else {
-    text.style.display = "none";
+    btn.style.display = "none";
+  }
+}
+
+function checkAll(o) {
+  var boxes = document.getElementsByTagName("input");
+
+  for (var x = 0; x < boxes.length; x++) {
+    var obj = boxes[x];
+    if (obj.type == "checkbox") {
+      if (obj.name != "check")
+        obj.checked = o.checked;
+    }
   }
 }

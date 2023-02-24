@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.db import models
 from django.db.models import TextChoices
 from django.utils import timezone
@@ -18,7 +16,7 @@ class ToDoList(models.Model):
     status = models.CharField(max_length=20, null=False, blank=False, choices=StatusChoice.choices,
                               default=StatusChoice.NEW_STATUS, verbose_name="Status")
     is_deleted = models.BooleanField(verbose_name="Deleted", null=False, default=False)
-    action_date = models.DateField(default=date.today, verbose_name="Date of completion")
+    action_date = models.DateField(verbose_name="Date of completion", null=True, blank=True, default=timezone.now)
     deleted_date = models.DateTimeField(verbose_name="Date of deletion", null=True, default=None)
 
     def __str__(self):

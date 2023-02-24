@@ -2,11 +2,14 @@
 {% block title %}Tasks View{% endblock %}
 {% block content_heading %}Задачи{% endblock %}
 {% block content %}
+{% if tasks %}
 <form action="{% url 'multiple_tasks_delete' %}" method="post">
-    <input type="submit" class="btn btn-danger" value="Удалить выбранные"/>
+    <input type="checkbox" id="check_all" onclick="checkbox_show_delete_button(this.id); javascript:checkAll(this)"/>
+    <label for="check_all" class="checkbox_main_delete_button pe-5">Выбрать все</label>
+    <input type="submit" class="btn btn-danger" value="Удалить выбранные" id="checkbox_delete_button"
+           style="display: none;"/>
+    {% csrf_token %}
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% if tasks %}
-        {% csrf_token %}
         {% for task in tasks %}
         <div class="col pt-3">
             <div class="card">
@@ -15,7 +18,8 @@
                         <h5 class="card-title">Задача #{{ task.id }}</h5>
                         <a class="card-details ps-3" href="{% url 'task_details' task.pk %}">Побробнее...</a>
                         <input type="checkbox" class="form-check-input card-checkbox" name="checkbox"
-                               value="{{ task.pk }}">
+                               value="{{ task.pk }}" id="task_checkbox{{ task.pk }}"
+                               onclick="checkbox_show_delete_button(this.id)">
                     </div>
                     <p class="card-text"><b>Описание:</b> {{ task.description }}</p>
                     {% for choice in choices %}
@@ -64,9 +68,11 @@
         <br>
         {% endfor %}
         {% else %}
-        <h2>Задач нет!</h2>
-        <p><a href="{% url 'task_create' %}">Добавить новую задачу</a></p>
+        <div class="another_view">
+            <h2>Задач нет!</h2>
+            <p><a href="{% url 'task_create' %}">Добавить новую задачу</a></p>
+        </div>
         {% endif %}
-{% endblock %}
-</div>
+        {% endblock %}
+    </div>
 </form>
