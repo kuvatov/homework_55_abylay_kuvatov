@@ -37,6 +37,14 @@ def task_delete(request: WSGIRequest, pk: int):
     return redirect('tasks_view')
 
 
+def multiple_tasks_delete(request: WSGIRequest):
+    if request.method == 'POST':
+        tasks_list = list(map(int, request.POST.getlist('checkbox')))
+        for pk in tasks_list:
+            ToDoList.objects.get(pk=pk).delete()
+    return redirect('tasks_view')
+
+
 def task_edit(request: WSGIRequest, pk: int):
     task = get_object_or_404(ToDoList, pk=pk)
     if request.method == 'GET':
